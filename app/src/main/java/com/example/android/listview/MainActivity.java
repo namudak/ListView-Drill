@@ -1,10 +1,15 @@
 package com.example.android.listview;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         mData= new ArrayList<>();
 
         for(int i= 0; i< 50; i++) {
-            mData.add(new People("Richard"+ i, "010-1234-567"+ i, R.drawable.justjava));
+            mData.add(new People("Richard"+ i, "010-6288-256"+ i, R.drawable.justjava));
         }
         for(int i= 0; i< 50; i++) {
             mData.add(new People("Sunny"+ i, "010-4564-567"+ i, R.mipmap.ic_launcher));
@@ -45,6 +50,18 @@ public class MainActivity extends AppCompatActivity {
     private void initListView() {
         ListView mListView= (ListView)findViewById(R.id.List_view);
         mListView.setAdapter(mAdapter);
+
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(MainActivity.this, "Position : "+ position, Toast.LENGTH_SHORT).show();
+
+                Intent intent= new Intent(Intent.ACTION_DIAL,
+                        Uri.parse("tel:"+ mData.get(position).getPhoneNumber()));
+
+                startActivity(intent);
+            }
+        });
     }
 
 
