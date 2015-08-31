@@ -6,7 +6,7 @@ package com.example.android.listview;
 public class People {
     private String name;
     private String phoneNumber;
-    private  int imageResourceId;
+    private int imageResourceId;
 
     public People(String name, String phoneNumber, int imageResourceId) {
         this.name = name;

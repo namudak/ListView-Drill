@@ -5,16 +5,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
-    private List<Map<String, String>> mData;
-    private SimpleAdapter mAdapter;
+    private List<People> mData;
+    private CustomAdapter mAdapter;
     private ListView mListView;
 
     @Override
@@ -32,21 +29,16 @@ public class MainActivity extends AppCompatActivity {
     private void initData() {
         mData= new ArrayList<>();
 
-        for(int i= 0; i< 100; i++) {
-            Map<String, String> data= new HashMap<>();
-
-            data.put("item", "Item "+ i);
-            data.put("subitem", "Sub Item "+ i);
-
-            mData.add(data);
+        for(int i= 0; i< 50; i++) {
+            mData.add(new People("Richard"+ i, "010-1234-567"+ i, R.drawable.justjava));
+        }
+        for(int i= 0; i< 50; i++) {
+            mData.add(new People("Sunny"+ i, "010-4564-567"+ i, R.mipmap.ic_launcher));
         }
     }
 
     private void initAdapter() {
-        mAdapter= new SimpleAdapter(this, mData,
-                android.R.layout.simple_list_item_2,
-                new String[] {"item", "subitem"},
-                new int[] {android.R.id.text1, android.R.id.text2});
+        mAdapter= new CustomAdapter(getApplicationContext(), mData);
 
     }
 
